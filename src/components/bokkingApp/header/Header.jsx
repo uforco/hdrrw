@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Datetime from "./Datetime";
@@ -8,6 +7,7 @@ import { IoPersonCircleOutline, IoBusinessSharp } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { bookingadd } from "./../../../redux/bookingapp/action";
+import bddistric from "../../../../public/bd-districts";
 
 const Header = () => {
   const Dispatch = useDispatch();
@@ -15,9 +15,9 @@ const Header = () => {
   const [districts, setDistricts] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   if (districts.length < 1) {
-    dataBrack();
+    setDistricts(bddistric());
   }
-
+  console.log();
   const {
     register,
     handleSubmit,
@@ -33,12 +33,6 @@ const Header = () => {
     }
   };
 
-  function dataBrack() {
-    axios
-      .get("./../../../../public/bd-districts.json")
-      .then(({ data }) => setDistricts(data.districts));
-  }
-
   const seletestyle =
     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500";
 
@@ -50,6 +44,7 @@ const Header = () => {
       >
         <div className="  text-black flex gap-20 justify-center items-center ">
           {/* Destination From */}
+
           <div>
             <h2>Destination From</h2>
             <div className=" py-4 flex justify-center items-center gap-2 text-xl ">
@@ -58,10 +53,10 @@ const Header = () => {
               </p>
               <select className={seletestyle} {...register("DestinationFrom")}>
                 <option value="selete">selete</option>
-                {districts.length < 1 ? (
+                {districts?.length < 1 ? (
                   <option value="selete">selete</option>
                 ) : (
-                  districts.map((item, inx) => (
+                  districts?.map((item, inx) => (
                     <option key={inx} value={item.name}>
                       {item.name}
                     </option>
@@ -70,6 +65,7 @@ const Header = () => {
               </select>
             </div>
           </div>
+
           {/* Destination To */}
           <div>
             <h2>Destination To</h2>
@@ -79,10 +75,10 @@ const Header = () => {
               </p>
               <select className={seletestyle} {...register("DestinationTo")}>
                 <option value="selete">selete</option>
-                {districts.length < 1 ? (
+                {districts?.length < 1 ? (
                   <option value="selete">selete</option>
                 ) : (
-                  districts.map((item, inx) => (
+                  districts?.map((item, inx) => (
                     <option key={inx} value={item.name}>
                       {item.name}
                     </option>

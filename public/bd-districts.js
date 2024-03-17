@@ -1,5 +1,7 @@
-{
-  "districts": [
+ 
+ const bddistric = () => {
+  
+ return [
     {
       "id": "1",
       "division_id": "3",
@@ -515,4 +517,6 @@
       "long": "89.0705"
     }
   ]
-}
+
+ }
+export default bddistric
